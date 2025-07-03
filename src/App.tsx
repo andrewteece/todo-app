@@ -1,8 +1,12 @@
+import './index.css';
+
 function App() {
   return (
-    <div>
-      <h1 className='text-3xl'>Test</h1>
-    </div>
+    <>
+      <div className='min-h-screen bg-red-500 text-white flex items-center justify-center'>
+        <h1 className='font-bold underline text-blue-600'>Hello Tailwind!</h1>
+      </div>
+    </>
   );
 }
 
