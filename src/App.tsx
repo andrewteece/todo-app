@@ -4,7 +4,9 @@ function App() {
   return (
     <>
       <div className='min-h-screen bg-red-500 text-white flex items-center justify-center'>
-        <h1 className='font-bold underline text-blue-600'>Hello Tailwind!</h1>
+        <h1 className='font-bold underline text-blue-600 text-3xl'>
+          Hello Tailwind!
+        </h1>
       </div>
     </>
   );
