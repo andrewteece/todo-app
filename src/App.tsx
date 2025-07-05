@@ -1,5 +1,6 @@
 import BackgroundHeading from './components/BackgroundHeading';
 import Footer from './components/Footer';
+import Header from './components/Header';
 
 function App() {
   return (
@@ -7,7 +8,7 @@ function App() {
       <BackgroundHeading />
 
       <main className='relative w-[60.75rem] shadow-[0_4px_4px_rgb(0,0,0,0.08)] h-[39.75rem] bg-[#fff] rounded-[.5rem] overflow-hidden grid grid-cols-[7fr_4fr] grid-rows-[3.6875rem_1fr]'>
-        <header className='col-[1/3] row-[1/2] bg-[hsl(34,64%,96%)] border-b border-black/[0.08]'></header>
+        <Header />
         <ul></ul>
 
         <section className='col-[2/3] row-[2/3] bg-[hsl(30,100%,99%)] border-l border-black/[0.08]'></section>
