@@ -1,4 +1,9 @@
-const initialTodos = ['buy groceries', 'feed the cat', 'call plumber'];
+const initialTodos = [
+  'buy groceries',
+  'feed the cat',
+  'call plumber',
+  'review React flash cards',
+];
 
 export default function TodoList() {
   return (
