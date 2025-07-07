@@ -1,23 +1,41 @@
-import { createContext, useEffect, useState } from 'react';
-import { Todo } from '../lib/types';
+import {
+  createContext,
+  useEffect,
+  useState,
+  ReactNode,
+  useContext,
+} from 'react';
+import { Todo, TodosContextType } from '../lib/types';
 import { useKindeAuth } from '@kinde-oss/kinde-auth-react';
 
-export const TodosContext = createContext(null);
+export const TodosContext = createContext<TodosContextType | undefined>(
+  undefined
+);
 
-export default function TodosContextProvider({ children }) {
+export function useTodosContext() {
+  const context = useContext(TodosContext);
+  if (!context) {
+    throw new Error(
+      'useTodosContext must be used within a TodosContextProvider'
+    );
+  }
+  return context;
+}
+
+export default function TodosContextProvider({
+  children,
+}: {
+  children: ReactNode;
+}) {
   const { isAuthenticated } = useKindeAuth();
 
-  // state
   const [todos, setTodos] = useState<Todo[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  // derived state
   const totalCount = todos.length;
   const completedCount = todos.filter((todo) => todo.completed).length;
 
-  // actions / event handlers
-  const addTodo = (content) => {
-    // check if user is logged in
+  const addTodo = (content: string) => {
     if (todos.length >= 3 && !isAuthenticated) {
       alert('To add more todos, please log in.');
       return;
@@ -32,18 +50,19 @@ export default function TodosContextProvider({ children }) {
       },
     ]);
   };
-  const toggleTodo = (id) => {
+
+  const toggleTodo = (id: number) => {
     setTodos(
       todos.map((todo) =>
         todo.id === id ? { ...todo, completed: !todo.completed } : todo
       )
     );
   };
-  const deleteTodo = (id) => {
+
+  const deleteTodo = (id: number) => {
     setTodos(todos.filter((todo) => todo.id !== id));
   };
 
-  // side effects
   useEffect(() => {
     const fetchTodos = async () => {
       setIsLoading(true);
