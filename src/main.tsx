@@ -11,8 +11,8 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <KindeProvider
       clientId='5d58d7731a5848348f092b93ebf17722'
       domain='https://andrewscomputerrepairshop.kinde.com'
-      redirectUri='http://localhost:3000'
-      logoutUri='http://localhost:3000'
+      redirectUri='http://localhost:5173'
+      logoutUri='http://localhost:5173'
     >
       <TodosContextProvider>
         <App />
