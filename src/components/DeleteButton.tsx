@@ -1,17 +1,8 @@
-import { useTodosContext } from '../lib/hook';
-
-interface DeleteButtonProps {
-  id: string;
-}
-
-export default function DeleteButton({ id }: DeleteButtonProps) {
-  const { deleteTodo } = useTodosContext();
-
+export default function DeleteButton({ id, setTodos }) {
   return (
     <button
-      onClick={(e) => {
-        e.stopPropagation();
-        deleteTodo(id);
+      onClick={() => {
+        setTodos((prev) => prev.filter((todo) => todo.id !== id));
       }}
     >
       ❌
