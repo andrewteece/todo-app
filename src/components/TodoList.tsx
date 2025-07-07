@@ -1,5 +1,5 @@
 import DeleteButton from './DeleteButton';
-import { useTodosContext } from '../lib/hook';
+import { useTodosContext } from '../lib/hooks';
 
 export default function TodoList() {
   const { todos, toggleTodo, isLoading } = useTodosContext();
