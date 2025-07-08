@@ -5,7 +5,7 @@ export function useTodosContext() {
 
   if (!context) {
     throw new Error(
-      'TodosContet must be used with a TodosContextProvider component'
+      'useTodosContext must be used with a TodosContextProvider component'
     );
   }
 
