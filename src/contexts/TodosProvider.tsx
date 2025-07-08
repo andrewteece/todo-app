@@ -1,32 +1,13 @@
-import {
-  createContext,
-  useEffect,
-  useState,
-  ReactNode,
-  useContext,
-} from 'react';
-import { Todo, TodosContextType } from '../lib/types';
+import { useEffect, useState, ReactNode } from 'react';
+import { TodosContext } from './TodosContext';
 import { useKindeAuth } from '@kinde-oss/kinde-auth-react';
+import { Todo } from '../lib/types';
 
-export const TodosContext = createContext<TodosContextType | undefined>(
-  undefined
-);
-
-export function useTodosContext() {
-  const context = useContext(TodosContext);
-  if (!context) {
-    throw new Error(
-      'useTodosContext must be used within a TodosContextProvider'
-    );
-  }
-  return context;
+interface TodosProviderProps {
+  children: ReactNode;
 }
 
-export default function TodosContextProvider({
-  children,
-}: {
-  children: ReactNode;
-}) {
+export default function TodosProvider({ children }: TodosProviderProps) {
   const { isAuthenticated } = useKindeAuth();
 
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -66,13 +47,11 @@ export default function TodosContextProvider({
   useEffect(() => {
     const fetchTodos = async () => {
       setIsLoading(true);
-
       const response = await fetch(
         'https://bytegrad.com/course-assets/api/todos'
       );
       const todos = await response.json();
       setTodos(todos);
-
       setIsLoading(false);
     };
 
