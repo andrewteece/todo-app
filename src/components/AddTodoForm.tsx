@@ -14,7 +14,7 @@ export default function AddTodoForm() {
         setTodoContent('');
       }}
     >
-      <h2 className='text-[hsl(34,25%,11%)] text-[1rem] font-semibold'>
+      <h2 className='text-[hsl(34,25%,11%)] text-[1rem] font-semibold font-primary'>
         Add a todo
       </h2>
       <input
