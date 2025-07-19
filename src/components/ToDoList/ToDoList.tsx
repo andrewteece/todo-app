@@ -1,42 +1,52 @@
-import DeleteButton from '../DeleteButton';
-import { useTodosContext } from '../../contexts/TodosContext';
+import { useEffect, useState } from 'react';
+import AddToDo from './AddToDo';
+import ToDo from './ToDo';
+import { Todo } from '../../types/todo';
+import { loadFromStorage, saveToStorage } from '../utils/storage';
 
-export default function TodoList() {
-  const { todos, toggleTodo, isLoading } = useTodosContext();
+function ToDoList() {
+  const [todos, setTodos] = useState<Todo[]>([]);
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    const stored = loadFromStorage<Todo[]>('todos');
+    if (stored) setTodos(stored);
+    setLoaded(true);
+  }, []);
+
+  useEffect(() => {
+    if (!loaded) return;
+    saveToStorage('todos', todos);
+  }, [todos, loaded]);
+
+  const handleDeleteTodo = (deleteId: string) => {
+    setTodos(todos.filter((todo) => todo.id !== deleteId));
+  };
+
+  const toggleTodoCompletion = (todoId: string) => {
+    setTodos(
+      todos.map((todo) =>
+        todo.id === todoId ? { ...todo, completed: !todo.completed } : todo
+      )
+    );
+  };
 
   return (
-    <ul className='col-[1/2] row-[2/3] bg-[#fff] [scrollbar-width:thin] relative'>
-      {isLoading && (
-        <li className='h-full flex justify-center items-center font-semibold'>
-          Loading todos...
-        </li>
-      )}
-
-      {todos.length === 0 ? (
-        <li className='h-full flex justify-center items-center font-semibold'>
-          Start by adding a todo
-        </li>
-      ) : null}
-
-      {todos.map((todo) => {
-        return (
-          <li
+    <div>
+      <h2 className='text-2xl font-bold mb-4'>To Do List</h2>
+      <AddToDo todos={todos} setTodos={setTodos} />
+      <div>
+        {todos.map((todo) => (
+          <ToDo
             key={todo.id}
-            className={`flex justify-between items-center px-8 h-[50px] text-[14px] cursor-pointer border-b border-b-[rgba(0,0,0,0.08)]`}
-            onClick={() => {
-              toggleTodo(todo.id);
-            }}
-          >
-            <span
-              className={`${todo.completed ? 'line-through text-[#ccc]' : ''}`}
-            >
-              {todo.content}
-            </span>
-
-            <DeleteButton id={todo.id} />
-          </li>
-        );
-      })}
-    </ul>
+            todo={todo}
+            toggleTodoCompletion={toggleTodoCompletion}
+            handleDeleteTodo={handleDeleteTodo}
+          />
+        ))}
+      </div>
+    </div>
   );
 }
+
+export default ToDoList;
