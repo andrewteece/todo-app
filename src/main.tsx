@@ -4,7 +4,7 @@ import App from './App.tsx';
 import { KindeProvider } from '@kinde-oss/kinde-auth-react';
 
 import TodosProvider from './contexts/TodosProvider.tsx';
-import './index.css';
+import './styles/index.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
