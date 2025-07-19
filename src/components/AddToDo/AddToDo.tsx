@@ -1,21 +1,19 @@
-function AddToDo({
-  todos,
-  setTodos,
-}: {
-  todos: any[];
-  setTodos: (todos: any[]) => void;
-}) {
-  const [inputValue, setInputValue] = useState('');
+import { useState } from 'react';
+import { AddToDoProps } from '@types';
+
+function AddToDo({ todos, setTodos }: AddToDoProps) {
+  const [inputValue, setInputValue] = useState<string>('');
 
   const handleAddTask = () => {
-    if (!inputValue) {
+    const trimmed = inputValue.trim();
+    if (!trimmed) {
       alert('Please enter a valid task');
       return;
     }
 
     const newTodo = {
       id: crypto.randomUUID(),
-      task: inputValue,
+      task: trimmed,
       completed: false,
     };
 
@@ -41,3 +39,5 @@ function AddToDo({
     </div>
   );
 }
+
+export default AddToDo;

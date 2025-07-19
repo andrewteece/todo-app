@@ -1,12 +1,6 @@
-function ToDo({
-  todo,
-  toggleTodoCompletion,
-  handleDeleteTodo,
-}: {
-  todo: { id: string, task: string, completed: boolean },
-  toggleTodoCompletion: (id: string) => void,
-  handleDeleteTodo: (id: string) => void,
-}) {
+import { ToDoProps } from '@types';
+
+function ToDo({ todo, toggleTodoCompletion, handleDeleteTodo }: ToDoProps) {
   const { completed, task, id } = todo;
 
   return (
@@ -38,3 +32,5 @@ function ToDo({
     </div>
   );
 }
+
+export default ToDo;

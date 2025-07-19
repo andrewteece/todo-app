@@ -25,6 +25,7 @@
     "paths": {
       "@components/*": ["components/*"],
       "@utils/*": ["utils/*"],
+       "@types": ["types"],  
       "@types/*": ["types/*"]
     }
   },
