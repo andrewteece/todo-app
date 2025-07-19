@@ -1,0 +1,7 @@
+.rowAddTask {
+  display: flex;
+  background-color: #eee;
+  border-radius: 30px;
+  padding-left: 1rem;
+  margin-bottom: 1.5rem;
+}
